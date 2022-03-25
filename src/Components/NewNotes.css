@@ -1,0 +1,42 @@
+
+
+
+button:hover {
+  background-color: #aaa;} 
+  
+.btn1 {
+
+      margin-right:-10px;
+      background-color: #f5f5f5  ;
+      width: 50px;
+      height: 30px;
+      border-radius: 5px;
+      border: none;
+  
+  }
+
+.btn2 {
+  margin-right:+40px;
+    background-color: #f5f5f5 ;
+      width: 350px;
+      height: 30px;
+      border-radius: 5px;
+      border: none;
+  
+  }
+
+  .btn3 {
+
+    margin-left:-40px;
+    background-color: #f5f5f5 ;
+    width: 50px; 
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+
+}
+
+
+
+
+
