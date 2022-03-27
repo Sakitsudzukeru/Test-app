@@ -1,87 +1,47 @@
-import React, { Component } from 'react'
-import { PlusCircleOutlined } from '@ant-design/icons';
-import './NewNotes.css';
+import React, { useState } from 'react'
 import MyButton from './button/MyButton'
 import MyInput from './input/MyInput'
 import MyTextarea from './textarea/MyTextarea';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 
+export default function NewNotes({ create }) {
+  const [notes, setNotes] = useState({ title: '', textnots: '' })
 
-export default class NewNotes extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          title: "",
-          text: "",
-          notes: []
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
+  const addNewNotes = (e) => {
+    e.preventDefault()
 
-      handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
-      }
-      
-      handleSubmit(event) {
-        event.preventDefault();
-        let nots = {
-          title: this.state.title,
-          text: this.state.text
-        }
-        let arr = this.state.notes
-        arr.unshift(nots)
-        this.setState({notes: arr})
-        this.setState({...this.state, title: ""})
-        this.setState({...this.state, text: ""})
-      }
+    const NewNots = {
+      ...notes, id: Date.now()
+    }
+    create(NewNots)
+    setNotes({ title: '', textnots: '' })
+  }
 
-      renderNotes() {
-        return this.state.notes.map((nots) => {
-          return (
-            <div >
-              <div >
-                <h3 >{nots.title}</h3>
-                <p >{nots.text}</p>
-              </div>
-            </div>
-          )
-        })
-      }
+  return (
+    <div>
+      <form className="new">
 
-    render() {
-        return (
-          <div className="new">
-           
-         
-            <form className="form" onSubmit={this.handleSubmit}>
-              <div >
-              <h4 style={{ textAlign: "center" }}>Добавить заметку</h4>
-                <MyInput  
-                name="title" 
-                value={this.state.title} 
-                onChange={this.handleChange} 
-                className="btn2" 
-                placeholder="Заголовок" />
-              </div>
-              <div>
-              <hr style={{ width: "350px" }} />
-                <MyTextarea
-                className="btn2" 
-                name="text" 
-                value={this.state.text} 
-                onChange={this.handleChange} 
-                id="exampleFormControlTextarea1" 
-                placeholder="Текст" 
-               ></MyTextarea>
-              </div>
+        <h4 style={{ textAlign: "center" }}>Добавить заметку</h4>
 
-              <MyButton type="submit" className="btn2"><PlusCircleOutlined /></MyButton>
-            </form>
-         
-            <div>
-              {this.renderNotes()}
-            </div>
-          </div>
-        )
-      }}
+        <MyInput
+          value={notes.title}
+          onChange={e => setNotes({ ...notes, title: e.target.value })}
+          className="btn3"
+          placeholder="Заголовок"
+        />
+        <hr style={{ width: "365px" }} />
+        <MyTextarea
+          value={notes.textnots}
+          onChange={e => setNotes({ ...notes, textnots: e.target.value })}
+          className="btn3"
+          placeholder="Текст" />
+
+        <MyButton
+          onClick={addNewNotes}
+          type="submit" className="btn3"><PlusCircleOutlined /></MyButton>
+      </form>
+
+    </div>
+  )
+}
